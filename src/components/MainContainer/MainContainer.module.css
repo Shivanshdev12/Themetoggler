@@ -1,0 +1,125 @@
+.mainContainer {
+    padding: 60px 0px 60px 0px;
+}
+
+.mainContainer h3 {
+    font-size: 22px !important;
+    font-weight: 600 !important;
+    padding-bottom: 10px !important;
+    margin-bottom: 5px !important;
+}
+
+.mainContainer img {
+    width: 250px !important;
+}
+
+.mainContainer .alignCenter {
+    align-items: center !important;
+}
+
+.commonLeft {
+    text-align: left !important;
+}
+
+.commonPadding {
+    padding: 10px 0px !important;
+}
+
+.mainInput {
+    padding: 10px 0px !important;
+}
+
+.inputContainer {
+    width: 80% !important;
+    background-color: #eee !important;
+    padding: 10px !important;
+    border-radius: 5px !important;
+    margin-top: 10px !important;
+}
+
+.filter {
+    padding: 20px 0px !important;
+    text-align: left !important;
+}
+
+.iconBox {
+    display: flex !important;
+    align-items: center !important;
+    gap: 10px !important;
+}
+
+.editBox {
+    background-color: rgba(238, 130, 238, 0.478) !important;
+    border-radius: 50% !important;
+    width: 16px !important;
+    height: 16px !important;
+    padding: 5px !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    cursor: pointer !important;
+}
+
+.deleteBox {
+    background-color: rgba(255, 0, 0, 0.387) !important;
+    border-radius: 50% !important;
+    width: 16px !important;
+    height: 16px !important;
+    padding: 5px !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    cursor: pointer !important;
+}
+
+@media screen and (max-width:425px) {
+
+    .mainContainer img {
+        padding: 20px 0px !important;
+    }
+
+    .boxContainer th {
+        font-size: 12px !important;
+        font-weight: 600 !important;
+        padding: 8px 5px !important;
+    }
+
+    .boxContainer td {
+        font-size: 12px !important;
+        padding: 8px 5px !important;
+    }
+
+    .mainContainer h3 {
+        font-size: 18px !important;
+        text-align: center !important;
+    }
+
+    .mainContainer p {
+        font-size: 14px !important;
+        text-align: center !important;
+    }
+
+    .mainContainer .imgBox {
+        text-align: center !important;
+    }
+
+    .editBox {
+        width: 12px !important;
+        height: 12px !important;
+        padding: 3px !important;
+    }
+
+    .deleteBox {
+        width: 12px !important;
+        height: 12px !important;
+        padding: 3px !important;
+    }
+
+    .inputContainer {
+        width: 90% !important;
+        background-color: #eee !important;
+        padding: 10px !important;
+        border-radius: 5px !important;
+    }
+
+}

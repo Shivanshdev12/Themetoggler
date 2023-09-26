@@ -1,0 +1,46 @@
+.light {
+    box-shadow: 0 15px 40px -20px rgba(40, 44, 63, .15) !important;
+}
+
+.headContainer .commonFlex {
+    display: flex !important;
+}
+
+.headContainer .justifyCenter {
+    justify-content: flex-end !important;
+}
+
+.headContainer .alignCenter {
+    align-items: center !important;
+}
+
+.headDesc h3 {
+    font-size: 28px !important;
+    font-weight: 600 !important;
+    text-align: left !important;
+}
+
+.headContainer .iconBox {
+    background-color: #c2c2c2 !important;
+    border-radius: 50% !important;
+    width: 16px !important;
+    height: 16px !important;
+    padding: 10px !important;
+}
+
+.headContainer svg {
+    font-size: 18px !important;
+}
+
+@media screen and (max-width:425px) {
+    .headContainer .justifyCenter {
+        justify-content: flex-start !important;
+    }
+
+    .headDesc h3 {
+        font-size: 22px !important;
+        padding: 10px 0px !important;
+        font-weight: 600 !important;
+        text-align: left !important;
+    }
+}

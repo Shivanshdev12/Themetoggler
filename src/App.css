@@ -2,37 +2,53 @@
   text-align: center;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+.dark {
+  background-color: #0F151B !important;
+  color: #fff !important;
+  box-shadow: 0 15px 40px -20px rgba(255, 255, 255, 0.15) !important;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+.dark input::placeholder {
+  color: #0F151B !important;
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+.dark table thead th {
+  color: #eee !important;
+  font-weight: 600 !important;
 }
 
-.App-link {
-  color: #61dafb;
+.dark table tr td {
+  color: #eee !important;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.dark ::global(.MuiSelect-select) {
+  border-bottom: #eee !important;
+}
+
+.dark label {
+  color: #eee !important;
+}
+
+.dark div[role="button"] {
+  color: #eee !important;
+}
+
+
+/* Light */
+.light {
+  color: #212121 !important;
+  background-color: #fff !important;
+  box-shadow: 0 15px 40px -20px rgba(40, 44, 63, .15) !important;
+}
+
+.light input::placeholder {
+  color: #0F151B !important;
+}
+
+.light table thead th {
+  font-weight: 600 !important;
+}
+
+.light ::global(.MuiSelect-select) {
+  border-bottom: #eee !important;
 }
