@@ -29,10 +29,11 @@
   color: #eee !important;
 }
 
-.dark div[role="button"] {
-  color: #eee !important;
+.dark table {
+  border: 1px solid #eee !important;
+  border-radius: 5px !important;
+  box-shadow: 0 15px 40px -20px rgba(255, 255, 255, 0.15) !important;
 }
-
 
 /* Light */
 .light {
@@ -51,4 +52,10 @@
 
 .light ::global(.MuiSelect-select) {
   border-bottom: #eee !important;
+}
+
+.light table {
+  border: 1px solid #eee !important;
+  border-radius: 5px !important;
+  box-shadow: 5px 8px 30px -20px rgba(40, 44, 63, .15) !important;
 }

@@ -12,7 +12,8 @@ const appSlice = createSlice({
       } else state.theme = "light";
     },
     addTask: (state, action) => {
-      state.tasklist.push(action.payload);
+      if (action.payload.title !== "" && action.payload.desc !== "" && action.payload.status !== "")
+        state.tasklist.push(action.payload);
     },
     deleteTask: (state, action) => {
       state.tasklist.splice(action.payload.index, 1);

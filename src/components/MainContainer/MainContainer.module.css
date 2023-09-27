@@ -72,6 +72,10 @@
     cursor: pointer !important;
 }
 
+.dark .filter div[role="button"] {
+    color: #eee !important;
+}
+
 @media screen and (max-width:425px) {
 
     .mainContainer img {

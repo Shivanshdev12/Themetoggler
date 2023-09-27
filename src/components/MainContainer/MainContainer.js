@@ -26,14 +26,34 @@ import {FiEdit2} from "react-icons/fi";
 import {MdDeleteOutline} from "react-icons/md";
 
 const MainContainer = () => {
+  let res = "";
+  // OR we can also create a single state object.
   const [title, setTitle] = useState("");
   const [desc, setDesc] = useState("");
   const [status, setStatus] = useState("Pending");
   const [filter, setFilter] = useState("All");
+  const [titleErr, setTitleError] = useState(false);
+  const [descErr, setDescError] = useState(false);
   const tasklist = useSelector((state) => state.app.tasklist);
   const dispatch = useDispatch();
+  const validateInput = () => {
+    console.log(title, desc, status);
+    if (title === "" || title.trim() === "") {
+      setTitleError(true);
+    }
+    if (desc === "" || desc.trim() === "") {
+      setDescError(true);
+    }
+    if (titleErr || descErr) {
+      return false;
+    }
+    return true;
+  };
   const addTaskHandler = () => {
     // We can use any package also to generate random id
+    if (!validateInput()) {
+      return;
+    }
     dispatch(
       appActions.addTask({
         id: Math.floor(Math.random() + Math.random() * 10),
@@ -49,8 +69,10 @@ const MainContainer = () => {
   const textHandler = (e, type) => {
     if (type === "title") {
       setTitle(e.target.value);
+      setTitleError(false);
     } else if (type === "desc") {
       setDesc(e.target.value);
+      setDescError(false);
     } else {
       setStatus(e.target.value);
     }
@@ -100,7 +122,8 @@ const MainContainer = () => {
                   value={title}
                   rows={2}
                   onChange={(e) => textHandler(e, "title")}
-                  required={true}
+                  error={titleErr}
+                  helperText={titleErr ? "Please enter title" : ""}
                 ></TextField>
                 <TextField
                   fullWidth
@@ -111,6 +134,8 @@ const MainContainer = () => {
                   value={desc}
                   placeholder="Description"
                   onChange={(e) => textHandler(e, "desc")}
+                  error={descErr}
+                  helperText={descErr ? "Please enter Description" : ""}
                   required={true}
                 ></TextField>
                 <Select value={status} label="Status" onChange={(e) => textHandler(e, "status")} required>
@@ -156,7 +181,7 @@ const MainContainer = () => {
                 </Select>
               </FormControl>
             </Box>
-            {tasklist.length >= 0 ? (
+            {tasklist.length > 0 ? (
               <Box className={styles.boxContainer}>
                 <Table>
                   <TableHead>
@@ -168,77 +193,79 @@ const MainContainer = () => {
                     </TableRow>
                   </TableHead>
                   <TableBody>
-                    {tasklist.map((task, index) => {
-                      if (filter === "Pending" && task.status === "Pending") {
-                        return (
-                          <TableRow key={task.id}>
-                            <TableCell width="10%">{task.title}</TableCell>
-                            <TableCell width="30%">{task.desc}</TableCell>
-                            <TableCell width="20%">{task.status}</TableCell>
-                            <TableCell width="20%">
-                              <Box className={styles.iconBox}>
-                                <Box className={styles.editBox} onClick={() => editHandler(task, index)}>
-                                  <Tooltip title="Edit">
-                                    <FiEdit2 />
-                                  </Tooltip>
+                    {
+                      (res = tasklist.map((task, index) => {
+                        if (filter === "Pending" && task.status === "Pending") {
+                          return (
+                            <TableRow key={task.id}>
+                              <TableCell width="10%">{task.title}</TableCell>
+                              <TableCell width="30%">{task.desc}</TableCell>
+                              <TableCell width="20%">{task.status}</TableCell>
+                              <TableCell width="20%">
+                                <Box className={styles.iconBox}>
+                                  <Box className={styles.editBox} onClick={() => editHandler(task, index)}>
+                                    <Tooltip title="Edit">
+                                      <FiEdit2 />
+                                    </Tooltip>
+                                  </Box>
+                                  <Box className={styles.deleteBox} onClick={() => deleteHandler(index)}>
+                                    <Tooltip title="Delete">
+                                      <MdDeleteOutline />
+                                    </Tooltip>
+                                  </Box>
                                 </Box>
-                                <Box className={styles.deleteBox} onClick={() => deleteHandler(index)}>
-                                  <Tooltip title="Delete">
-                                    <MdDeleteOutline />
-                                  </Tooltip>
+                              </TableCell>
+                            </TableRow>
+                          );
+                        }
+                        if (filter === "Completed" && task.status === "Completed") {
+                          return (
+                            <TableRow key={task.id}>
+                              <TableCell width="20%">{task.title}</TableCell>
+                              <TableCell width="40%">{task.desc}</TableCell>
+                              <TableCell width="20%">{task.status}</TableCell>
+                              <TableCell width="20%">
+                                <Box className={styles.iconBox}>
+                                  <Box className={styles.editBox} onClick={() => editHandler(task, index)}>
+                                    <Tooltip title="Edit">
+                                      <FiEdit2 />
+                                    </Tooltip>
+                                  </Box>
+                                  <Box className={styles.deleteBox} onClick={() => deleteHandler(index)}>
+                                    <Tooltip title="Delete">
+                                      <MdDeleteOutline />
+                                    </Tooltip>
+                                  </Box>
                                 </Box>
-                              </Box>
-                            </TableCell>
-                          </TableRow>
-                        );
-                      }
-                      if (filter === "Completed" && task.status === "Completed") {
-                        return (
-                          <TableRow key={task.id}>
-                            <TableCell width="20%">{task.title}</TableCell>
-                            <TableCell width="40%">{task.desc}</TableCell>
-                            <TableCell width="20%">{task.status}</TableCell>
-                            <TableCell width="20%">
-                              <Box className={styles.iconBox}>
-                                <Box className={styles.editBox} onClick={() => editHandler(task, index)}>
-                                  <Tooltip title="Edit">
-                                    <FiEdit2 />
-                                  </Tooltip>
+                              </TableCell>
+                            </TableRow>
+                          );
+                        }
+                        if (filter === "All") {
+                          return (
+                            <TableRow key={task.id}>
+                              <TableCell width="20%">{task.title}</TableCell>
+                              <TableCell width="40%">{task.desc}</TableCell>
+                              <TableCell width="20%">{task.status}</TableCell>
+                              <TableCell width="20%">
+                                <Box className={styles.iconBox}>
+                                  <Box className={styles.editBox} onClick={() => editHandler(task, index)}>
+                                    <Tooltip title="Edit">
+                                      <FiEdit2 />
+                                    </Tooltip>
+                                  </Box>
+                                  <Box className={styles.deleteBox} onClick={() => deleteHandler(index)}>
+                                    <Tooltip title="Delete">
+                                      <MdDeleteOutline />
+                                    </Tooltip>
+                                  </Box>
                                 </Box>
-                                <Box className={styles.deleteBox} onClick={() => deleteHandler(index)}>
-                                  <Tooltip title="Delete">
-                                    <MdDeleteOutline />
-                                  </Tooltip>
-                                </Box>
-                              </Box>
-                            </TableCell>
-                          </TableRow>
-                        );
-                      }
-                      if (filter === "All") {
-                        return (
-                          <TableRow key={task.id}>
-                            <TableCell width="20%">{task.title}</TableCell>
-                            <TableCell width="40%">{task.desc}</TableCell>
-                            <TableCell width="20%">{task.status}</TableCell>
-                            <TableCell width="20%">
-                              <Box className={styles.iconBox}>
-                                <Box className={styles.editBox} onClick={() => editHandler(task, index)}>
-                                  <Tooltip title="Edit">
-                                    <FiEdit2 />
-                                  </Tooltip>
-                                </Box>
-                                <Box className={styles.deleteBox} onClick={() => deleteHandler(index)}>
-                                  <Tooltip title="Delete">
-                                    <MdDeleteOutline />
-                                  </Tooltip>
-                                </Box>
-                              </Box>
-                            </TableCell>
-                          </TableRow>
-                        );
-                      }
-                    })}
+                              </TableCell>
+                            </TableRow>
+                          );
+                        }
+                      }))
+                    }
                   </TableBody>
                 </Table>
               </Box>
